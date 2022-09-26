@@ -1,8 +1,8 @@
 #################
-#RONK Antoine
-#GABRIEL CALIXTE Damien
-#Un seul fichier source contenant les definitions de fonction
-#Executer 
+# Antoine RONK
+# Damien GABRIEL CALIXTE
+# Toutes les définitions de fonctions sont effectué en local
+# Un seul fichier TPMGI_GABRIEL_RONK.py a executer sur Python 3.10.6
 #################
 import matplotlib.pyplot as plt
 import numpy as np
@@ -86,7 +86,7 @@ def dessinRRR(q) :
     plt.show()
 ################################################
 ############ Exemple d'affichage
-dessinRRR(np.radians(qbutdeg))
+#dessinRRR(np.radians(qbutdeg))
 
 ########################################
 ######
@@ -97,16 +97,49 @@ dessinRRR(np.radians(qbutdeg))
 qbutdeg= np.asarray([45.,45.,-60])
 qbut = np.radians(qbutdeg)
 Xbut= np.asarray(mgd(qbut))
-dessinRRR(qbut)
+#dessinRRR(qbut)
 #### Définition de qinit 
 qinitdeg=np.asarray([120., 25,  45.])
 qinit= np.radians(qinitdeg)
 Xinit=np.asarray(mgd(qinit))
 print("Xinit = ",Xinit)
 ##### A CODER
-##q= qinit
-##i=0
-##
+
+##Méthode de Newton ##
+q=qinit
+i=0
+j=0
+Hq=[]
+pas=0.5
+eps=0.03
+Hnorm = 1000
+n=0
+
+print('La configuration de depart est',qinit)
+
+NbIter=int(input('Saisir le nombres d iterations : '))
+
+while(Hnorm>eps and i<NbIter) :
+    Jinv=np.linalg.inv(jacobienne(q)) #Calcul de l'inverse
+    Jt=Jinv.transpose() #Calcul de la transposee
+    H=(Xbut-mgd(q))  #Calcul de l erreur
+    q=q-pas*np.dot(Jt,H) #Iteration
+    Hnorm=np.linalg.norm(H) #Norme de l ecart entre le Xbut et le Xc actuel
+    Hq.append(Hnorm) #Remplissage du vecteur avec la norme
+    n+=n
+    i+=i
+
+print("La boucle a ete executee ",n,"fois")
+
+print("Evolution de l erreur")
+
+for j in range(n) :
+    print(Hq[j])
+
+
+
+
+
 ##
 ##nbpas= ???
 ##epsx= ???
