@@ -157,7 +157,8 @@ print("Evolution de l erreur")
 for j in range(i) :
     print(Hq[j])
     
-
+plt.plot(Hq)
+plt.show()
 
 
 
