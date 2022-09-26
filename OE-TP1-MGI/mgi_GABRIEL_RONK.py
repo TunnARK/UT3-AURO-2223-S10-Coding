@@ -69,6 +69,7 @@ qbutdeg= np.asarray([45, 45,  -60.])
 
 ## Calcul Xbut à partir de qbut
 Xbut= np.asarray(mgd(np.radians(qbutdeg)))
+# Print des resultats
 print("Xbut=", Xbut[0], "Ybut = ", Xbut[1], "Theta but (deg)= ", np.degrees(Xbut[2]))
 
 ## Fct d'affichage 2D du robot dans le plan
@@ -121,44 +122,40 @@ print('La configuration de depart est',qinit)
 i=0
 j=0
 Hq=[]
-pas=0.5 # pas fixe
-eps=0.03 # espilon
+pas=0.1 # pas fixe
+eps=0.001 # espilon
 Hnorm = 1000
 
 # Saisie NnIter
 NbIter=int(input('Saisir le nombres d iterations : '))
 
-print(i)
 # Boucle principale
 while(Hnorm>eps and i<NbIter) :
-    print(i)
     # Jacobienne
     J = jacobienne(q)
     # Calcul de l'inverse
     Jinv=np.linalg.inv(J)
-    # Calcul de la transposee
-    Jt=Jinv.transpose()
     # Calcul de l ecart entre le Xbut et le Xc actuel
     H=(Xbut-mgd(q))
     # Iteration
-    q=q-pas*np.dot(Jt,H)
+    q=q+pas*np.dot(Jinv,H)
     # Calcul de l erreur avec norme euclidienne
     Hnorm=np.linalg.norm(H)
     # Remplissage du vecteur avec la norme
     Hq.append(Hnorm)
     i=i+1
-
+    
 # Info Boucle
 print("La boucle a ete executee ",i,"fois")
+# print("Xbut=", Xbut[0], "Ybut = ", Xbut[1], "Theta but (deg)= ", np.degrees(Xbut[2]))
+# print("qbut=", qbut[0], "qbut = ", qbut[1], "Theta qbut (deg)= ", np.degrees(qbut[2]))
 
 # Evolution Erreur
 print("Evolution de l erreur")
-
-for j in range(i) :
-    print(Hq[j])
-    
 plt.plot(Hq)
 plt.show()
+#for j in range(i) :
+#    print(Hq[j])
 
 
 
