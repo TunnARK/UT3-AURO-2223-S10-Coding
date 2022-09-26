@@ -114,35 +114,50 @@ Xinit=np.asarray(mgd(qinit))
 print("Xinit = ",Xinit)
 
 ## Methode de Newton
+
+# Intialisation
 q=qinit
+print('La configuration de depart est',qinit)
 i=0
 j=0
 Hq=[]
-pas=0.5
-eps=0.03
+pas=0.5 # pas fixe
+eps=0.03 # espilon
 Hnorm = 1000
-n=0
 
-print('La configuration de depart est',qinit)
-
+# Saisie NnIter
 NbIter=int(input('Saisir le nombres d iterations : '))
 
+print(i)
+# Boucle principale
 while(Hnorm>eps and i<NbIter) :
-    Jinv=np.linalg.inv(jacobienne(q)) #Calcul de l'inverse
-    Jt=Jinv.transpose() #Calcul de la transposee
-    H=(Xbut-mgd(q))  #Calcul de l erreur
-    q=q-pas*np.dot(Jt,H) #Iteration
-    Hnorm=np.linalg.norm(H) #Norme de l ecart entre le Xbut et le Xc actuel
-    Hq.append(Hnorm) #Remplissage du vecteur avec la norme
-    n+=n
-    i+=i
+    print(i)
+    # Jacobienne
+    J = jacobienne(q)
+    # Calcul de l'inverse
+    Jinv=np.linalg.inv(J)
+    # Calcul de la transposee
+    Jt=Jinv.transpose()
+    # Calcul de l ecart entre le Xbut et le Xc actuel
+    H=(Xbut-mgd(q))
+    # Iteration
+    q=q-pas*np.dot(Jt,H)
+    # Calcul de l erreur avec norme euclidienne
+    Hnorm=np.linalg.norm(H)
+    # Remplissage du vecteur avec la norme
+    Hq.append(Hnorm)
+    i=i+1
 
-print("La boucle a ete executee ",n,"fois")
+# Info Boucle
+print("La boucle a ete executee ",i,"fois")
 
+# Evolution Erreur
 print("Evolution de l erreur")
 
-for j in range(n) :
+for j in range(i) :
     print(Hq[j])
+    
+
 
 
 
