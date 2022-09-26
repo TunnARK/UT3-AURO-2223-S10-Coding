@@ -14,6 +14,26 @@ Support de cours :
 ![](/assets/images/OE.TP1.Sujet-02.png)
 ![](/assets/images/OE.TP1.Sujet-03.png)
 
+## Notes Présentation TP
+
+- incrémentation vs solution directe
+- mgd nécessaire pour avoir $X_k$ 
+    - idée est que X_k = X_0
+    - mgd donné et jacobienne donnée
+    - $\dot X = J \dot q$ donnée
+- Newton
+    - au lieu de calculer la hessiene
+    - on va calculer le zero de $H(q)$
+
+- Gradient
+    - singularite = det de la jaco à 0
+        - attention sbras tendu det de J est 0
+    - afficher l'erreur et espére que l'erreur converge vers 0
+    - attention gradient sensible p.r. au pas
+
+- scipy
+    - ici on cherche le modele alors qu'avant on nous l'a donné et il fallait faire l'algo (ici l'algo est donné)
+
 ## 1. Méthode de Newton
 
 > ![](/assets/images/OE.TP1.Sujet-04.png)
