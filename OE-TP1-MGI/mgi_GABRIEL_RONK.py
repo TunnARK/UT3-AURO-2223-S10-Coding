@@ -1,5 +1,8 @@
 #############
-# Notre CODE
+# Antoine RONK
+# Damien GABRIEL CALIXTE
+# Toutes les définitions de fonctions sont effectué en local
+# Un seul fichier TPMGI_GABRIEL_RONK.py a executer sur Python 3.10.6
 #################
 import matplotlib.pyplot as plt
 import numpy as np
@@ -52,7 +55,7 @@ def jacobienne(qrad):
 
 ###################################################################################
 # Afin de donner une situation atteignable pour le robot,
-# vous pouvez utiliser le mgd pour définir Xbut à partir d’une configuration en q
+# vous pouvez utiliser le mgd pour définir Xbut à partir d'une configuration en q
 ###################################################################################
 ## qbut est donné en degré
 qbutdeg= np.asarray([45, 45, -60.])
@@ -61,7 +64,7 @@ Xbut= np.asarray(mgd(np.radians(qbutdeg)))
 print("Xbut=", Xbut[0], "Ybut = ", Xbut[1], "Theta but (deg)= ", np.degrees(Xbut[2]))
 
 ############################################
-## Fct d’affichage 2D du robot dans le plan
+## Fct d'affichage 2D du robot dans le plan
 def dessinRRR(q) :
 xA, yA = (0, 0)
 xB, yB = (np.cos(q[0]), np.sin(q[0]))
@@ -70,11 +73,11 @@ xD, yD = (np.cos(q[0]) + np.cos(q[0]+q[1]) + np.cos(q[0]+q[1]+q[2])),(np.sin(q[0
 X=[xA, xB,xC,xD]
 Y=[yA,yB,yC,yD]
 plt.plot(X,Y, color="orange", lw=10, alpha=0.5, marker="o", markersize=20, mfc="red")
-plt.axis(’equal’)
-plt.axis(’off’)
+plt.axis('equal')
+plt.axis('off')
 plt.show()
 ################################################
-############ Exemple d’affichage
+############ Exemple d'affichage
 dessinRRR(np.radians(qbutdeg))
 
 ########################################
@@ -94,13 +97,13 @@ Xinit=np.asarray(mgd(qinit))
 print("Xinit = ",Xinit)
 
 ##### A CODER
-##q= qinit
+q= qinit
 ##i=0
 ##
 ##
 ##nbpas= ???
 ##epsx= ???
-## erx = valeur initale de du critère qu’on cherche à minimiser
+## erx = valeur initale de du critère qu'on cherche à minimiser
 ##list_erreur = [erx] #
 ##start_time = time.process_time()
 ##while (????):
@@ -123,7 +126,7 @@ print("Xinit = ",Xinit)
 ##erx=np.linalg.norm(Xer)
 ##print("Erreur finale=",erx)
 ##abs = np.linspace(0,len(list_erreur)-1,(len(list_erreur)))
-##plt.plot(abs,list_erreur,’k’)
+##plt.plot(abs,list_erreur,'k')
 ##plt.show(block=True)
 ##
 ##dessinRRR(qc)
