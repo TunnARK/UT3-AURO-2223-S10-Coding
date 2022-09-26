@@ -116,6 +116,8 @@ print("Xinit = ",Xinit)
 
 ## Methode de Newton
 
+print("## METHODE DE NEWTON")
+
 # Intialisation
 q=qinit
 print('La configuration de depart est',qinit)
@@ -158,7 +160,50 @@ plt.show()
 #    print(Hq[j])
 
 
+## Methode des gradients
 
+print("## METHODE DES GRADIENTS")
+
+# Intialisation
+q=qinit
+print('La configuration de depart est',qinit)
+i=0
+j=0
+Hq=[]
+pas=0.1 # pas fixe
+eps=0.001 # espilon
+Hnorm = 1000
+
+# Saisie NnIter
+NbIter=int(input('Saisir le nombres d iterations : '))
+
+# Boucle principale
+while(Hnorm>eps and i<NbIter) :
+    # Jacobienne
+    J = jacobienne(q)
+    # Calcul de la transposee
+    Jt=J.transpose()
+    # Calcul de l ecart entre le Xbut et le Xc actuel
+    H=(Xbut-mgd(q))
+    # Iteration
+    q=q+pas*np.dot(Jt,H)
+    # Calcul de l erreur avec norme euclidienne
+    Hnorm=np.linalg.norm(H)
+    # Remplissage du vecteur avec la norme
+    Hq.append(Hnorm)
+    i=i+1
+    
+# Info Boucle
+print("La boucle a ete executee ",i,"fois")
+# print("Xbut=", Xbut[0], "Ybut = ", Xbut[1], "Theta but (deg)= ", np.degrees(Xbut[2]))
+# print("qbut=", qbut[0], "qbut = ", qbut[1], "Theta qbut (deg)= ", np.degrees(qbut[2]))
+
+# Evolution Erreur
+print("Evolution de l erreur")
+plt.plot(Hq)
+plt.show()
+#for j in range(i) :
+#    print(Hq[j])
 
 
 ##
