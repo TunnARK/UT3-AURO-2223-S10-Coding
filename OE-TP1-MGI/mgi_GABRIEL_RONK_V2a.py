@@ -7,6 +7,7 @@
 #################
 
 ## Libraries
+from pickle import TRUE
 import matplotlib.pyplot as plt
 import numpy as np
 import time
@@ -114,6 +115,8 @@ qinitdeg=np.asarray([120., 25,  45.])
 qinit= np.radians(qinitdeg)
 Xinit=np.asarray(mgd(qinit))
 print("Xinit = ",Xinit)
+print("qinit = ",qinit)
+
 
 ## Methode de Newton
 
@@ -209,11 +212,12 @@ print("\n")
 print("\n")
 
 def FuncH(Xd,q) :
-    res = Xd-mdg(q)
+    res = Xd-mgd(q)
     return (res)
 
 
-print(optimize.newton(FuncH(Xbut,q),qinit,jacobienne(q),eps,NbIter))
+#bool test = TRUE
+print(optimize.root_scalar(FuncH,args=(Xbut,q),method='newton',x0=qinit,fprime=bool(True),xtol=eps,maxiter=NbIter))
 
 
 
