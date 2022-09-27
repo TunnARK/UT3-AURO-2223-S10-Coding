@@ -10,6 +10,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import time
+from scipy import optimize 
 
 ## MGD 
 # Calcul du MGD du robot RRR
@@ -159,9 +160,9 @@ plt.show()
 #for j in range(i) :
 #    print(Hq[j])
 
-
+print("\n")
 ## Methode des gradients
-
+print("\n")
 print("## METHODE DES GRADIENTS")
 
 # Intialisation
@@ -202,8 +203,17 @@ print("La boucle a ete executee ",i,"fois")
 print("Evolution de l erreur")
 plt.plot(Hq)
 plt.show()
-#for j in range(i) :
-#    print(Hq[j])
+
+print("\n")
+## Methode des scipy.optimize
+print("\n")
+
+def f(x):
+    return ()
+
+
+scipy.optimize.newton(funcH)
+
 
 
 ##
