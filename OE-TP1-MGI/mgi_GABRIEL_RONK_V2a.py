@@ -208,11 +208,12 @@ print("\n")
 ## Methode des scipy.optimize
 print("\n")
 
-def FuncH(Xd,q):
-    return (Xq_mdg(q))
+def FuncH(Xd,q) :
+    res = Xd-mdg(q)
+    return (res)
 
 
-Xspcipy=scipy.optimize.newton(FuncH,qinit,jacobienne,eps,NbIter,)
+print(optimize.newton(FuncH(Xbut,q),qinit,jacobienne(q),eps,NbIter))
 
 
 
