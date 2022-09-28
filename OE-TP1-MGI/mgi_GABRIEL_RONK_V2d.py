@@ -156,7 +156,7 @@ print("La boucle a ete executee ",i,"fois")
 
 # Evolution Erreur
 print("Evolution de l erreur")
-plt.plot(Hq)
+#plt.plot(Hq)
 #plt.show()
 
 ## Methode des gradients
@@ -169,7 +169,7 @@ print('La configuration de depart est',qinit)
 i=0
 j=0
 Hq=[]
-pas=0.1 # pas fixe
+pas=0.001 # pas fixe
 eps=0.001 # espilon
 Hnorm = 1000
 
@@ -200,7 +200,7 @@ print("La boucle a ete executee ",i,"fois")
 # Evolution Erreur
 print("Evolution de l erreur")
 plt.plot(Hq)
-#plt.show()
+plt.show()
 
 
 ## Methode des scipy.optimize
@@ -221,8 +221,8 @@ def FuncH(Xd,q):
 # Xscipy=optimize.minimize(FuncH,x0=qinit,args=(Xbut,q),jac=jacobienne,method='Newton-CG')
 #X=optimize.minimize(FuncH(q),qinit).x
 
-X=optimize.root_scalar(FuncH,args=*(Xbut,q),method='newton',x0=qinit,fprime=True)
-print("La solution donnee par root finding est ",X.root,"tandis que la configuration but est de",Xbut)
+#X=optimize.root_scalar(FuncH,args=*(Xbut,q),method='newton',x0=qinit,fprime=True)
+#print("La solution donnee par root finding est ",X.root,"tandis que la configuration but est de",Xbut)
 
 
 ##

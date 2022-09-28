@@ -44,7 +44,82 @@ Support de cours :
 
 > ![](/assets/images/OE.TP1.Sujet-05.png)
 
-..
+L'implémentation de la métohde des gradient est réaslisée grâce au code suivant :
+
+```python
+## Methode des gradients
+
+print("## METHODE DES GRADIENTS")
+
+# Intialisation
+q=qinit
+print('La configuration de depart est',qinit)
+i=0
+j=0
+Hq=[]
+pas=0.5 # pas fixe
+eps=0.001 # espilon
+Hnorm = 1000
+
+# Saisie NnIter
+NbIter=int(input('Saisir le nombres d iterations : '))
+
+# Boucle principale
+while(Hnorm>eps and i<NbIter) :
+    # Jacobienne
+    J = jacobienne(q)
+    # Calcul de la transposee
+    Jt=J.transpose()
+    # Calcul de l ecart entre le Xbut et le Xc actuel
+    H=(Xbut-mgd(q))
+    # Iteration
+    q=q+pas*np.dot(Jt,H)
+    # Calcul de l erreur avec norme euclidienne
+    Hnorm=np.linalg.norm(H)
+    # Remplissage du vecteur avec la norme
+    Hq.append(Hnorm)
+    i=i+1
+    
+# Info Boucle
+print("La boucle a ete executee ",i,"fois")
+# print("Xbut=", Xbut[0], "Ybut = ", Xbut[1], "Theta but (deg)= ", np.degrees(Xbut[2]))
+# print("qbut=", qbut[0], "qbut = ", qbut[1], "Theta qbut (deg)= ", np.degrees(qbut[2]))
+
+# Evolution Erreur
+print("Evolution de l erreur")
+plt.plot(Hq)
+plt.show()
+```
+Dans ce code il est demande à l'utilisateur de saisir le nombre d'itérations souhaitées `NbIter`. Ensuite, on exécute une boucle `while()` dont la condition d'arrêt est atteinte si le on exède le nombre d'itérations maximal ou si l'écart entre le vecteur souhaité `Xbut` et le Modèle Géométrique Direct (MGD) au point courant `q` est en dessous d'un certain seuil `eps`. 
+
+Au sein de cette boucle, on calcul la transposée de la matrice jacobienne pour la configuaration courante. La configuation suivante est mis à jour par `q=q+pas*np.dot(Jt,H)`. On rempli un vecteur contenant l'écart entre les MGD courants et le but. Enfin, on compte le nombre d'itérations `i` qui peut être plus faible que `NbIter`. 
+
+Enfin, le module `numpy` permet de réaliser le tracé
+
+Avec un `pas=0.5`, la solution ne converge pas et on obtient pour  `NbIter=100` l'évolution de l'erreur suivante.
+
+
+![Gradient_pas_05_100_it.png]
+
+$$
+
+    \text{Figure : Evolution de l'erreur pour un pas de 0,5, 100 itérations $\epsilon$=0,001}
+
+$$
+
+Il nous faut alors choisir un pas plus fin afin d'obtenir une meilleur précision. On s'apperçoit q'un pas de `pas=0.2` permet une convergence de l'erreur mais cela créait toujours des oscillations.
+
+C'est à partir de `pas=0.1` que l'on trouve une convergence de l'erreur en 100 itératons.
+
+![Gradient_pas_01_100_it.png] 
+
+$$
+
+    \text{Figure : Evolution de l'erreur pour un pas de 0,1, 100 itérations $\epsilon$=0,001}
+
+$$
+
+Veuillez noter que l'algorithme parvient à donner une solution en 
 
 ## 3. Utilisation de scipy.optimize
 
