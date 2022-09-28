@@ -114,6 +114,7 @@ qinitdeg=np.asarray([120., 25,  45.])
 qinit= np.radians(qinitdeg)
 Xinit=np.asarray(mgd(qinit))
 print("Xinit = ",Xinit)
+print("qinit = ",qinit)
 
 ## Methode de Newton
 
@@ -156,13 +157,10 @@ print("La boucle a ete executee ",i,"fois")
 # Evolution Erreur
 print("Evolution de l erreur")
 plt.plot(Hq)
-plt.show()
-#for j in range(i) :
-#    print(Hq[j])
+#plt.show()
 
-print("\n")
 ## Methode des gradients
-print("\n")
+
 print("## METHODE DES GRADIENTS")
 
 # Intialisation
@@ -202,18 +200,29 @@ print("La boucle a ete executee ",i,"fois")
 # Evolution Erreur
 print("Evolution de l erreur")
 plt.plot(Hq)
-plt.show()
+#plt.show()
 
-print("\n")
+
 ## Methode des scipy.optimize
-print("\n")
+
+# Reinitialisation de la configuration initiale
+q=qinit
+
+
+# Definition de la fonction a minimiser
 
 def FuncH(Xd,q):
-    return (Xq_mdg(q))
+    return (Xd-mgd(q))
 
 
-Xspcipy=scipy.optimize.newton(FuncH,qinit,jacobienne,eps,NbIter,)
+#Xres=optimize.newton(FuncH(Xd,q) : Xd-q, x0=qinit,fprime=jacobienne,args=q,tol=eps,maxiter=NbIter,disp=False)
 
+
+# Xscipy=optimize.minimize(FuncH,x0=qinit,args=(Xbut,q),jac=jacobienne,method='Newton-CG')
+#X=optimize.minimize(FuncH(q),qinit).x
+
+X=optimize.root_scalar(FuncH,args=*(Xbut,q),method='newton',x0=qinit,fprime=True)
+print("La solution donnee par root finding est ",X.root,"tandis que la configuration but est de",Xbut)
 
 
 ##
