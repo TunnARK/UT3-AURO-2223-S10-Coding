@@ -66,7 +66,7 @@ def jacobienne(qrad):
 ###################################################################################
 
 ## qbut est donné en degré
-qbutdeg= np.asarray([45, 45,  -60.])
+qbutdeg= np.asarray([-20, -90,  120])
 
 ## Calcul Xbut à partir de qbut
 Xbut= np.asarray(mgd(np.radians(qbutdeg)))
@@ -91,7 +91,9 @@ def dessinRRR(q) :
     plt.show()
 
 ## Affichage de qbutdeg
-#dessinRRR(np.radians(qbutdeg))
+## Affichage de qbut
+print("Affichage de la position du bras a la configuration but")
+dessinRRR(np.radians(qbutdeg))
 
 
 
@@ -106,8 +108,7 @@ qbutdeg= np.asarray([45.,45.,-60])
 qbut = np.radians(qbutdeg)
 Xbut= np.asarray(mgd(qbut))
 
-## Affichage de qbut
-# dessinRRR(qbut)
+
 
 ## Définition de qinit 
 qinitdeg=np.asarray([120., 25,  45.])
@@ -159,6 +160,10 @@ print("Evolution de l erreur")
 plt.plot(Hq)
 plt.show()
 
+# Visualisation de la position du bras
+print("Position optimale trouvee avec Newton")
+dessinRRR(np.radians(q))
+
 ## Methode des gradients
 
 print("## METHODE DES GRADIENTS")
@@ -203,6 +208,10 @@ plt.plot(Hq)
 plt.show()
 
 
+# Visualisation de la position du bras
+print("Position optimale trouvee avec la methode des gradients")
+dessinRRR(np.radians(q))
+
 ## Methode des scipy.optimize
 
 # Reinitialisation de la configuration initiale
@@ -218,10 +227,32 @@ FuncH=lambda q: np.linalg.norm((Xbut-mgd(q)))
 initial_guess=(Xbut-mgd(qinit))
 
 
-#Optimisation
+#Optimisation avec minimize
 
 X=optimize.minimize(FuncH, qinit)
 print("L optimum donnee par scipy est :", mgd(X.x), "\n Le but etait de", Xbut)
+
+
+# Visualisation de la position du bras
+print("Position optimale trouvee avec scipy.minimize")
+dessinRRR(np.radians(X.x))
+
+## Methode optimale comprenant une approxiamtion de la jacobienne
+
+# Initialisation de la configuration
+q=qinit
+
+
+# Definition de la fonction objectif (qui donne un resulat vectoriel a present)
+FuncH=lambda q: (Xbut-mgd(q))
+
+# Ititalisation et calcul du resulat de sortie : vecteur ligne de taille 3
+Jh=optimize.approx_fprime(np.ones(3),FuncH)
+
+print(Jh)
+
+# Optimisation avec la jacobienne approximee
+#X_japp=optimize.(FuncH,qinit,jac=Jh)
 
 ##
 ##nbpas= ???
