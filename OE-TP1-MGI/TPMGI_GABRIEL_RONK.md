@@ -38,7 +38,61 @@ Support de cours :
 
 > ![](/assets/images/OE.TP1.Sujet-04.png)
 
-..
+La méthode de Newton est implémenté grâce au programme ci-dessous :
+
+```python
+## Methode de Newton
+
+print("## METHODE DE NEWTON")
+
+# Intialisation
+q=qinit
+print('La configuration de depart est',qinit)
+i=0
+j=0
+Hq=[]
+pas=0.1 # pas fixe
+eps=0.001 # espilon
+Hnorm = 1000
+
+# Saisie NnIter
+NbIter=int(input('Saisir le nombres d iterations : '))
+
+# Boucle principale
+while(Hnorm>eps and i<NbIter) :
+    # Jacobienne
+    J = jacobienne(q)
+    # Calcul de l'inverse
+    Jinv=np.linalg.inv(J)
+    # Calcul de l ecart entre le Xbut et le Xc actuel
+    H=(Xbut-mgd(q))
+    # Iteration
+    q=q+pas*np.dot(Jinv,H)
+    # Calcul de l erreur avec norme euclidienne
+    Hnorm=np.linalg.norm(H)
+    # Remplissage du vecteur avec la norme
+    Hq.append(Hnorm)
+    i=i+1
+    
+# Info Boucle
+print("La boucle a ete executee ",i,"fois")
+
+# Evolution Erreur
+print("Evolution de l erreur")
+plt.plot(Hq)
+plt.show()
+
+# Visualisation de la position du bras
+print("Position optimale trouvee avec Newton")
+dessinRRR(np.radians(q))
+```
+On exécute une boucle `while()` dans laquelle le point suivant est calculé par :
+
+$$
+x_{k+1}=x_{k}+pas\times J^TH
+$$
+
+On ajouter la norme de l'erreur d'optimisation au vecteur pour le tracé.
 
 ## 2. Méthode du Gradient
 

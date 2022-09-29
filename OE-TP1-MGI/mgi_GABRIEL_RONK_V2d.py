@@ -252,7 +252,7 @@ Jh=optimize.approx_fprime(np.ones(3),FuncH)
 print(Jh)
 
 # Optimisation avec la jacobienne approximee
-#X_japp=optimize.(FuncH,qinit,jac=Jh)
+X_japp=optimize.(FuncH,qinit,jac=Jh)
 
 ##
 ##nbpas= ???
