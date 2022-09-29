@@ -156,8 +156,8 @@ print("La boucle a ete executee ",i,"fois")
 
 # Evolution Erreur
 print("Evolution de l erreur")
-#plt.plot(Hq)
-#plt.show()
+plt.plot(Hq)
+plt.show()
 
 ## Methode des gradients
 
@@ -209,21 +209,19 @@ plt.show()
 q=qinit
 
 
-# Definition de la fonction a minimiser
+# Definition de la fonction a minimiser (retourne une variable de dimension 1)
 
-def FuncH(Xd,q):
-    return (Xd-mgd(q))
+FuncH=lambda q: np.linalg.norm((Xbut-mgd(q)))
+
+# Construction du point de depart de l algorithme
+
+initial_guess=(Xbut-mgd(qinit))
 
 
-#Xres=optimize.newton(FuncH(Xd,q) : Xd-q, x0=qinit,fprime=jacobienne,args=q,tol=eps,maxiter=NbIter,disp=False)
+#Optimisation
 
-
-# Xscipy=optimize.minimize(FuncH,x0=qinit,args=(Xbut,q),jac=jacobienne,method='Newton-CG')
-#X=optimize.minimize(FuncH(q),qinit).x
-
-#X=optimize.root_scalar(FuncH,args=*(Xbut,q),method='newton',x0=qinit,fprime=True)
-#print("La solution donnee par root finding est ",X.root,"tandis que la configuration but est de",Xbut)
-
+X=optimize.minimize(FuncH, qinit)
+print("L optimum donnee par scipy est :", mgd(X.x), "\n Le but etait de", Xbut)
 
 ##
 ##nbpas= ???

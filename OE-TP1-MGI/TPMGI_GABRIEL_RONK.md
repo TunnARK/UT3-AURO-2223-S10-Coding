@@ -119,7 +119,7 @@ $$
 
 $$
 
-Veuillez noter que l'algorithme parvient à donner une solution en 
+Veuillez noter que l'algorithme réalise toujours 100 itérations.
 
 ## 3. Utilisation de scipy.optimize
 
