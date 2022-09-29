@@ -139,6 +139,9 @@ q=np.radians([+180,+180,+180])
 Dans ce cas, on abouti à un erreur qui oscille autour du point minimisant $H(q)$.
 
 ![Newton_init_proche_singularite.png]
+$$
+\text{Figure : Evolution de l'erreur pour un initialisation bras tendu avec un pas=0,1, $\epsilon$=0,001 et 100 itérations}
+$$
 
 ## 2. Méthode du Gradient
 
@@ -225,6 +228,45 @@ Veuillez noter que l'algorithme réalise toujours 100 itérations.
 
 > ![](/assets/images/OE.TP1.Sujet-06.png)
 [Documentation scipy.optimize](https://docs.scipy.org/doc/scipy/tutorial/optimize.html)
+
+
+L'implémentation avec `scipy.optimize` est rendu possible par le code source suivant :
+
+```python
+## Methode des scipy.optimize
+
+# Reinitialisation de la configuration initiale
+q=qinit
+
+
+# Definition de la fonction a minimiser (retourne une variable de dimension 1)
+
+FuncH=lambda q: np.linalg.norm((Xbut-mgd(q)))
+
+# Construction du point de depart de l algorithme
+
+initial_guess=(Xbut-mgd(qinit))
+
+
+#Optimisation avec minimize
+
+X=optimize.minimize(FuncH, qinit)
+print("L optimum donnee par scipy est :", mgd(X.x), "\n Le but etait de", Xbut)
+
+
+# Visualisation de la position du bras
+print("Position optimale trouvee avec scipy.minimize")
+dessinRRR(np.radians(X.x))
+```
+Cette méthode nécessite déclarer la fonction à optimiser. Ensuite, on passe en paramètre de `optimize.minimise()` la référence à cette fonction ainsi que le point d'initialisation.
+
+La solution est récupérée par `X.x`. On peut aussi l'afficher à l'écran et la comparer à la valeur but.
+
+On obtient la preuve après exécution :
+
+
+
+
 
 
 ## 4. Optimisation sous contrainte

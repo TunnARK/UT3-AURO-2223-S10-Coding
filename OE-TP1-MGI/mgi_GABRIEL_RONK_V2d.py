@@ -122,7 +122,7 @@ print("qinit = ",qinit)
 print("## METHODE DE NEWTON")
 
 # Intialisation
-q=np.radians([+180,+180,+180])
+q=qinit
 
 print('La configuration de depart est',qinit)
 i=0
