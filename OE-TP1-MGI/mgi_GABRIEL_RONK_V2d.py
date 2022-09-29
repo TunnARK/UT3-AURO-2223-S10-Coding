@@ -122,7 +122,8 @@ print("qinit = ",qinit)
 print("## METHODE DE NEWTON")
 
 # Intialisation
-q=qinit
+q=np.radians([+180,+180,+180])
+
 print('La configuration de depart est',qinit)
 i=0
 j=0
@@ -252,7 +253,7 @@ Jh=optimize.approx_fprime(np.ones(3),FuncH)
 print(Jh)
 
 # Optimisation avec la jacobienne approximee
-X_japp=optimize.(FuncH,qinit,jac=Jh)
+#X_japp=optimize.(FuncH,qinit,jac=Jh)
 
 ##
 ##nbpas= ???

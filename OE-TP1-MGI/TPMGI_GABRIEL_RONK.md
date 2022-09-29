@@ -89,10 +89,56 @@ dessinRRR(np.radians(q))
 On exécute une boucle `while()` dans laquelle le point suivant est calculé par :
 
 $$
-x_{k+1}=x_{k}+pas\times J^TH
+x_{k+1}=x_{k}+pas\times J^{-1}H
 $$
 
 On ajouter la norme de l'erreur d'optimisation au vecteur pour le tracé.
+
+D'ailleurs, on obtient pour un pas de $0,1$ et une erreur $\epsilon=1\times 10^{-3}$, on obtient le profil de convergence :
+
+![Newton_pas_01_100_it.png]
+
+
+
+$$
+\text{Figure : Evolution de l'erreur pour $\epsilon$=0,001 et pas=0,1}
+$$
+
+Notons que la boucle à été arrêté poar le critère $\epsilon$. En effet, on a réalisé que 82 itérations.
+
+![shell_newton_pas01_100it.png]
+
+$$
+\text{Figure : Capture du shell après exécution de 82 itérations}
+$$
+
+Nous pouvons aussi noter l'nfluence des paramètres de la recherche du minimum.
+
+* Tout d'abord, nous constatons que plus le pas est fin, plus la direction sera précise. Par conséquent, la trajectoire sera plus courte et donc le mouvement prendra moins de temps.
+
+
+![Newton_pas_1_100_it.png]
+$$
+\text{Figure : Evolution de l'erreur pour un pas=0,1, $\epsilon$=0,001 et 100 itérations}
+$$
+
+*Ensuite, un nombre d'itérations trop faible ne garanti pas de trouver la solution. On peut consater que si nous imposons `NbIter=10` alors la solution n'a pas le temps de converger comme l'explicite la figure ci-dessous.
+
+![Newton_pas01_10it.png]
+
+$$
+\text{Figure : Evolution de l'erreur pour un pas=0,1, $\epsilon$=0,001 et 10 itérations}
+$$
+
+* Enfin, le choix du point de départ influe sur la rapidité de la convergence. On prend par exemple, le bras tendu (configuration proche d'une singularité qui fait chuter le nombre de degrés de liberté local) comme point d'initialisation. Cela se traduit par la code suivant qui place tout les rotoïdes à un angle de 180° :
+
+```python
+# Intialisation
+q=np.radians([+180,+180,+180])
+```
+Dans ce cas, on abouti à un erreur qui oscille autour du point minimisant $H(q)$.
+
+![Newton_init_proche_singularite.png]
 
 ## 2. Méthode du Gradient
 
