@@ -66,7 +66,7 @@ def jacobienne(qrad):
 ###################################################################################
 
 ## qbut est donné en degré
-qbutdeg= np.asarray([45, 45,  -60.])
+qbutdeg= np.asarray([-20, -90,  120])
 
 ## Calcul Xbut à partir de qbut
 Xbut= np.asarray(mgd(np.radians(qbutdeg)))
@@ -91,7 +91,9 @@ def dessinRRR(q) :
     plt.show()
 
 ## Affichage de qbutdeg
-#dessinRRR(np.radians(qbutdeg))
+## Affichage de qbut
+print("Affichage de la position du bras a la configuration but")
+dessinRRR(np.radians(qbutdeg))
 
 
 
@@ -106,14 +108,14 @@ qbutdeg= np.asarray([45.,45.,-60])
 qbut = np.radians(qbutdeg)
 Xbut= np.asarray(mgd(qbut))
 
-## Affichage de qbut
-# dessinRRR(qbut)
+
 
 ## Définition de qinit 
 qinitdeg=np.asarray([120., 25,  45.])
 qinit= np.radians(qinitdeg)
 Xinit=np.asarray(mgd(qinit))
 print("Xinit = ",Xinit)
+print("qinit = ",qinit)
 
 ## Methode de Newton
 
@@ -121,6 +123,7 @@ print("## METHODE DE NEWTON")
 
 # Intialisation
 q=qinit
+
 print('La configuration de depart est',qinit)
 i=0
 j=0
@@ -157,12 +160,13 @@ print("La boucle a ete executee ",i,"fois")
 print("Evolution de l erreur")
 plt.plot(Hq)
 plt.show()
-#for j in range(i) :
-#    print(Hq[j])
 
-print("\n")
+# Visualisation de la position du bras
+print("Position optimale trouvee avec Newton")
+dessinRRR(np.radians(q))
+
 ## Methode des gradients
-print("\n")
+
 print("## METHODE DES GRADIENTS")
 
 # Intialisation
@@ -171,7 +175,7 @@ print('La configuration de depart est',qinit)
 i=0
 j=0
 Hq=[]
-pas=0.1 # pas fixe
+pas=0.001 # pas fixe
 eps=0.001 # espilon
 Hnorm = 1000
 
@@ -204,45 +208,49 @@ print("Evolution de l erreur")
 plt.plot(Hq)
 plt.show()
 
-print("\n")
+
+# Visualisation de la position du bras
+print("Position optimale trouvee avec la methode des gradients")
+dessinRRR(np.radians(q))
+
 ## Methode des scipy.optimize
-print("\n")
 
-def f(x):
-    return ()
-
-
-scipy.optimize.newton(funcH)
+# Reinitialisation de la configuration initiale
+q=qinit
 
 
+# Definition de la fonction a minimiser (retourne une variable de dimension 1)
 
-##
-##nbpas= ???
-##epsx= ???
-## erx = valeur initale de du critère qu'on cherche à minimiser
-##list_erreur = [erx] # 
-##start_time = time.process_time()
-##while (????):
-##    direction = ???
-##    pas= ???
-##    ...
-##    ...
-##    list_erreur.append(erx) # Stocker la valeur du critère dans une liste
-##    i=i+1
-##print("--- %s seconds ---" % round(time.process_time() - start_time,6))
-### Visualisation des résultats
-##print("Valeur finale du critère =",??," après ",i," itérations")
-##print("qinit en deg =", qinitdeg)
-##print("qcfinal en deg", np.degrees(qc))
-##X= mgd(qc)
-##print("Xinit              =",Xinit, type(Xinit))
-##print("Xfinal avec qfinal = ",X)
-##print("Xbut à atteindre   =", Xbut, type(Xbut))
-##Xer= Xbut -X
-##erx=np.linalg.norm(Xer)
-##print("Erreur finale=",erx)
-##abs = np.linspace(0,len(list_erreur)-1,(len(list_erreur)))
-##plt.plot(abs,list_erreur,'k')
-##plt.show(block=True)
-##
-##dessinRRR(qc)
+FuncH=lambda q: np.linalg.norm((Xbut-mgd(q)))
+
+# Construction du point de depart de l algorithme
+
+initial_guess=(Xbut-mgd(qinit))
+
+
+#Optimisation avec minimize
+
+X=optimize.minimize(FuncH, qinit)
+print("L optimum donnee par scipy est :", mgd(X.x), "\n Le but etait de", Xbut)
+
+
+# Visualisation de la position du bras
+print("Position optimale trouvee avec scipy.minimize")
+dessinRRR(np.radians(X.x))
+
+## Methode optimale comprenant une approxiamtion de la jacobienne
+
+# Initialisation de la configuration
+q=qinit
+
+
+# Definition de la fonction objectif (qui donne un resulat vectoriel a present)
+#FuncH=lambda q: (Xbut-mgd(q))
+
+# Ititalisation et calcul du resulat de sortie : vecteur ligne de taille 3
+#Jh=optimize.approx_fprime(np.ones(3),FuncH)
+
+#print(Jh)
+
+# Optimisation avec la jacobienne approximee
+#X_japp=optimize.(FuncH,qinit,jac=Jh)

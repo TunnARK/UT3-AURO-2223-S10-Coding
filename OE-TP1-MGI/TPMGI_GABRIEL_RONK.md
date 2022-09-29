@@ -264,9 +264,11 @@ La solution est récupérée par `X.x`. On peut aussi l'afficher à l'écran et 
 
 On obtient la preuve après exécution :
 
+![shell_minimize.png]
 
-
-
+$$
+\text{Figure : Capture du shell après exécution de scipy.optimize}
+$$
 
 
 ## 4. Optimisation sous contrainte
