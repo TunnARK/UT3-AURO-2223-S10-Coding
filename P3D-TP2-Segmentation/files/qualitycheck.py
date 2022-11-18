@@ -31,7 +31,7 @@ if __name__ == "__main__":
     model_object = np.delete(model_object, 3, 1)
     '''
 
-    ref = model_object
+    ref = model
     data = data02_object
 #    data = data03_object
     
