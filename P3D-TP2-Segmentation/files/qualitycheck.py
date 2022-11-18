@@ -40,12 +40,15 @@ if __name__ == "__main__":
     
     ##########################################################################
     # Run ICP to get data transformation w.r.t the model, final error and execution time
+    
+    
     #**************** To be completed ****************
     T = np.eye(3,3)
     errors = np.zeros((1,100))
     iterations = 100
     total_time=0
-    
+    [T, errors,iterations,total_time] = icp(data, ref, init_pose=None, max_iterations=20, tolerance=0.001)
+    print("ICP converged in",i,"iterations, lasted",total_time,"s and the matrix T is equal to\n",T)    
     
     # Draw results
     fig = plt.figure(1, figsize=(20, 5))
