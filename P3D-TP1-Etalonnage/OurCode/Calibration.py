@@ -61,8 +61,12 @@ class CalibrationBase:
             pass
         elif self.patternType == 'asymmetric_circles':
             # Implement findCirclesGrid here
-            pass
-        
+            #pass
+            [patternFound, corners] = cv.findCirclesGrid(frame, (self.cols,self.rows), None, cv.CALIB_CB_ASYMMETRIC_GRID)
+                #cv.findCirclesGrid(image, patternSize[, centers[, flags[, blobDetector]]])
+                # Flag CALIB_CB_ASYMMETRIC_GRID for an asymetric grid of circles
+                # Careful brackets are there to indicate that a param is optional
+                # Brackets contained in brackets indicate that the optional param is depend on the previous params
         return patternFound, corners
         
     def drawPattern(self, frame, corners, patternFound):
@@ -192,7 +196,8 @@ class MonoCalibration(CalibrationBase):
         self.workingImages, objectPoints, imgPoints, imageSize = self.detectInImages(framesPath)
   
         # Implement calibrateCameraExtended here
-        
+        [self.rms, self.cameraMatrix, self.distCoeffs, self.rvecs, self.tvecs, self.stdDeviationsIntrinsics, self.stdDeviationsExtrinsics, self.perViewErrors] = cv.calibrateCameraExtended(objectPoints, imgPoints, imageSize, None, None)
+            # Careful do not forget 
         print('\nRMS:', self.rms)
         print('camera matrix:\n', self.cameraMatrix)
         print('distortion coefficients: ', self.distCoeffs.ravel())
