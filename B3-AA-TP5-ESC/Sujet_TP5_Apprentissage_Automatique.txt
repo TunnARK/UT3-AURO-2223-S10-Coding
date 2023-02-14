@@ -1,0 +1,28 @@
+TP 5
+
+Ce dernier TP consiste à comparer les performances de deux architectures différentes, un MLP et un CNN, sur une tâche de classification d'évènements sonores (10 classes), sur le jeu de données ESC-10 (Environmental Sound Classification).
+
+Il est à faire en binôme, avec un dépôt de code et de compte-rendu écrit sous forme d'article scientifique.
+
+Chaque binôme doit fournir une seule archive ZIP par binôme contenant le rapport de TP au format pdf et le ipython notebook exporté depuis Google Colaboratory au format .ipynb. 
+
+Le nom des fichiers et de l'archive doivent comporter le nom des deux personnes composant le binôme.
+
+Le rapport devra être présenté sous une forme particulière : il s'agit d'écrire un article scientifique de 4 pages maximum en français en utilisant le format d'article RFIA fourni.
+
+L'objectif de cet article est de présenter une introduction sur le sujet, une description des données et des paramètres extraits, des descriptions de vos modèles, vos résultats en terme de performance ainsi qu'une analyse personnelle de vos résultats pour conclure. Veillez à donner tous les détails nécessaires pour qu'une tierce personne puisse reproduire les résultats. Des images d'illustration sont toujours bienvenues comme celles relatives à la fonction de coût et de précision lors de l'apprentissage, des images de spectrogrammes bien et mal classées, etc. Soyez créatifs !
+
+Pour se comparer à d'autres modèles et s'aider dans la rédaction, notamment sur la description du corpus, vous pouvez consulter l'article suivant : 
+
+http://karol.piczak.com/papers/Piczak2015-ESC-Dataset.pdf
+
+
+
+Eléments de notation :
+
+respect des consignes, présentation, orthographe = 1 pt
+Présentation théorique des méthodes utilisées (présentation des principes, méthode de décision, notations, rigueur) = 4 pts
+Présentation du protocole expérimental (description des données, archtectures des modèles, méthodologie, améliorations des modèles) = 4 pts
+Résultats obtenus (sous forme chiffrée, sous forme de matrice de confusions ou bien de manière graphique) = 4 pts
+Interprétation des résultats (présentation des résultats, faits tirés de ces résultats)= 4 pts
+Conclusions sur la comparaison des modèles utilisés, le MLP et le CNN (exactitude des propos, richesse des conclusions) = 3 pts

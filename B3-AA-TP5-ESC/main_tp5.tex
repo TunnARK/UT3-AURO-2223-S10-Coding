@@ -1,0 +1,141 @@
+%%%% patron de format latex pour rfia 2000.
+%%%% sans garanties. Plaintes \`a envoyer \`a \dev\null.
+%%%% deux colonnes pas de num\'erotation et 10 points
+%%%% necessite les fichiers a4.sty french.sty et rfia2000.sty
+
+%%%% Pour \LaTeXe
+\documentclass[a4paper,twoside,french]{article}
+\usepackage{rfia2000}
+\usepackage[T1]{fontenc}
+\usepackage{babel}
+\usepackage{times}
+
+%%%% Pour \LaTeXe sans babel
+%%%% \documentclass[a4paper,twoside]{article}
+%%%% \usepackage{rfia2000}
+%%%% \usepackage{french}
+%%%% \usepackage{times}
+
+%%%% Pour \LaTeX remplacer les trois ligne pr\'ec\'edente par les deux
+%%%% suivantes
+%%%%\documentstyle[a4,french]{article}
+%%%%\input{rfia2000}
+
+\begin{document}
+%%%%%Pas de date
+\date{}
+%%%%% Titre gras 14 points
+\title{\Large\bf Mon merveilleux article pour RFIA'2012
+       }
+%%%%% Si auteur unique
+%\author{L. Auteur \\
+%%  Son institut \\
+%%  Son addresse \\
+%%  Son email}
+%%%% pour deux auteurs
+\author{\begin{tabular}[t]{c@{\extracolsep{8em}}c}
+%%%% pour trois auteurs
+%%%%\author{\begin{tabular}[t]{c@{\extracolsep{6em}}c@{\extracolsep{6em}}c}
+%%%% pour quatre auteurs
+%%%%\author{\begin{tabular}[t]{c@{\extracolsep{4em}}c@{\extracolsep{4em}}c@{\extracolsep{4em}}c}
+%%%%pour plus d\'ebrouillez-vous !
+M. Oim\^eme${}^1$  & M. Oncopain${}^2$ \\
+\end{tabular}
+{} \\
+ \\
+${}^1$        Mon Institut   \\
+${}^2$        Son Institut
+{} \\
+ \\
+Mon adresse compl\`ete \\
+Mon adresse \'electronique
+}
+\maketitle
+%%%%  Pas de num\'erotation sur la page de titre
+\thispagestyle{empty}
+\subsection*{R\'esum\'e}
+{\em
+C'est mon r\'esum\'e. Il doit occuper quelques centim\`etres (moins de 10)
+y compris son titre qui est en 12 points gras.
+}
+\subsection*{Mots Clef}
+Exemple type, format, modèle.
+
+\subsection*{Abstract}
+{\em
+It's the English version of the abstract. Exactly as in French it must
+be short. It must speak of the same topics...
+}
+\subsection*{Keywords}
+Example, model, template.
+
+\section{Introduction}
+Le contenu de l'article peut \^etre r\'edig\'e avec n'importe quel formateur
+ou traitement de texte, pourvu qu'il r\'eponde aux crit\`eres de
+pr\'esentation donn\'es ici. L'objectif vis\'e est de proposer une unit\'e
+de pr\'esentation des actes, et nous vous invitons \`a tenter de respecter
+ce mod\`ele autant que le permet votre logiciel favori.
+
+Pour les auteurs utilisant \LaTeX\, le fichier source de ce
+texte (\verb|latex.tex|) est lui-m\^eme une base pour obtenir une
+sortie conforme avec \LaTeXe\footnote{ou \LaTeX}.
+
+Les autres trouveront des renseignements (peut-\^etre) plus lisibles
+pour eux dans le fichier \verb|word.doc| (Word).
+  
+Un fichier PDF contient \'egalement la d\'efinition compl\`ete de la
+pagination. Il a pour nom \verb|pages.pdf| et est cliquable sur la page
+Web.
+
+La base du texte est du Times-Roman 10 points pr\'esent\'e en deux colonnes.
+La s\'eparation inter-colonne est de 1 cm.
+
+Le titre principal est en 14 points gras (28 points = 1cm).
+
+Dans les sections, le titre est en 12 points gras.
+Les paragraphes ne sont pas decal\'es.
+
+Les sous-sections num\'erot\'ees comme suit~:
+\subsection{Travaux ant\'erieurs}
+Les en-t\^etes sont \'egalement en 12 points gras.
+
+Il n'y a pas n\'ecessairement d'espacement entre les paragraphes.
+
+Les r\'ef\'erences \`a la Bibliographie peuvent \^etre de la forme
+ \cite{key:foo} o\`u \cite{foo:baz}.  Les num\'eros correspondent \`a
+ l'ordre d'apparition dans la bibliographie, pas dans le texte.
+ L'ordre alphab\'etique est conseill\'e.
+
+\section{Le coin \LaTeX}
+Pour les utilisateurs de \LaTeX,
+ce patron est minimaliste et vous aurez besoin de votre manuel \LaTeX
+pour ins\'erer \'equations et images.
+
+Pour les images le << paquet >> \verb|graphicx| est tr\`es bien.
+
+Les fichiers de style n\'ecessaires pour la compilation \LaTeX\ sont :
+\begin{itemize}
+  \item \verb|a4.sty|  (pour \LaTeX, mais pas \LaTeXe)
+  \item \verb|french.sty| (ou Babel fran\c{c}ais)
+  \item \verb|rfia2000.sty|
+\end{itemize}
+Vous devriez avoir les deux premiers dans votre instalation de
+\LaTeX. Le dernier contient la d\'efinition des marges et vous devrez le
+r\'ecup\'erer.
+
+\subsection*{Annexe}
+Merci de votre participation.
+
+\begin{thebibliography}{9}
+\bibitem{foo:baz}
+U. Nexpert,
+{\em Le livre,}
+Son Editeur, 1929.
+\bibitem{key:foo}
+I. Troiseu-Pami,
+ Un article int\'eressant,
+{\em Journal de Spirou}, Vol. 17, pp. 1-100, 1987.
+\end{thebibliography}
+\end{document}
+
+
